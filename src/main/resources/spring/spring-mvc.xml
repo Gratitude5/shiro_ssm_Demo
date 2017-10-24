@@ -31,7 +31,7 @@
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="cache" value="true"/>
         <!--前缀-->
-        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="prefix" value="/WEB-INF/ftl/"/>
         <!--后缀-->
         <property name="suffix" value=".ftl"/>
         <!--编码设置-->
@@ -45,19 +45,23 @@
         <property name="exposeSessionAttributes" value="true"/>
 
     </bean>
-    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/"/>
+    <!-- 配置freeMarker的模板路径 -->
+    <!-- <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">   -->
+    <!-- 用自定义的类 替代原生类-->
+    <bean id="freemarkerConfig" class="com.liuyingke.utils.FreeMarkerConfigExtend">
+        <!--shiro标签仅限用在该路径下的ftl页面，不能使用include引入-->
+        <property name="templateLoaderPath" value="/" />
         <property name="freemarkerSettings">
             <props>
                 <prop key="template_update_delay">0</prop>
-                <prop key="default_encoding">UTF-8</prop>
-                <prop key="number_format">0.##########</prop>
+                <prop key="default_encoding">utf-8</prop>
+                <prop key="number_format">\#0.\#\#\#\#\#</prop>
                 <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
                 <prop key="classic_compatible">true</prop>
                 <prop key="template_exception_handler">ignore</prop>
+                <!--<prop key="auto_import">/common/page.ftl as p</prop>-->
+                <!--<prop key="auto_include">/common/page.ftl</prop>-->
             </props>
         </property>
     </bean>
-
-
 </beans>

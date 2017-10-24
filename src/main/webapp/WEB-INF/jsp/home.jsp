@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-    这里是首页
+    这里是首页(jsp页面)
     <shiro:user>
         欢迎[<shiro:principal/>]登录，<a href="/toLogin">退出</a>
     </shiro:user>
