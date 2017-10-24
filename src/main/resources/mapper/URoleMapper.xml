@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuyingke.dao.URoleMapper" >
+    <resultMap id="BaseResultMap" type="com.liuyingke.model.URole" >
+        <id column="rid" property="id" jdbcType="BIGINT" />
+        <result column="rname" property="name" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    rid, rname, type
+    </sql>
+
+    <insert id="insert" parameterType="com.liuyingke.model.URole">
+        insert into u_role (rid,name,type) values(#{rid},#{rname},#{type})
+    </insert>
+
+    <!--根据邮箱|用户名查询该用户所拥有角色的集合-->
+    <select id="findRolesByEmail" resultType="String" parameterType="String">
+        SELECT
+        r.rname
+        FROM
+        u_user u INNER JOIN u_user_role ur ON u.`uid`=ur.`uid`
+        INNER JOIN u_role r ON r.`rid`=ur.`rid` AND u.`email`=#{email}
+    </select>
+
+</mapper>
